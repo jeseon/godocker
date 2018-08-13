@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  production:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${HOST_PORT:-5000}:5000
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 1024
+    volumes:
+      - ${LOG_PATH:-/tmp}:${LOG_PATH:-/tmp}
+    environment:
+      - LOG_PATH=${LOG_PATH:-/tmp}
